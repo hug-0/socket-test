@@ -44,7 +44,7 @@ socket.on('message', function(msg) {
 // Phone data
 if (window.DeviceMotionEvent) {
   window.addEventListener('devicemotion', function(data) {
-    var acceleration = data.acceleration;
+    var acceleration = data.accelerationIncludingGravity;
     socket.emit('phone', acceleration);
   });
 }
