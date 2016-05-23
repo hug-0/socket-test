@@ -39,9 +39,14 @@ function initChart() {
     ]
   };
   latestLabel = startingData.labels[6];
-  chart = new Chart(ctx).Line(startingData, {
-    animationSteps: 15
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: startingData,
+    options: {
+      animationSteps: 15
+    }
   });
+  console.log(chart);
 }
 initChart();
 
