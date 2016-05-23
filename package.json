@@ -1,0 +1,24 @@
+{
+  "name": "socket-test",
+  "version": "0.0.1",
+  "description": "Socket App Test",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "socketio": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hug-0/socket-test.git"
+  },
+  "author": "hugo nordell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hug-0/socket-test/issues"
+  },
+  "homepage": "https://github.com/hug-0/socket-test#readme"
+}
