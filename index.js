@@ -43,9 +43,9 @@ io.on('connection', function (socket) {
   socket.on('phone', function(data) {
     socket.broadcast.emit('phone', {
       accelerometer: {
-        x: data.acceleration.x,
-        y: data.acceleration.y,
-        z: data.acceleration.z
+        x: data.accelerometer.x,
+        y: data.accelerometer.y,
+        z: data.accelerometer.z
       },
       gyro: {
         alpha: data.gyro.alpha,
