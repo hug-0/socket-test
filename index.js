@@ -1,5 +1,6 @@
 const express = require('express');
 var app = express();
+const path = require('path');
 const server = require('http').createServer(app);
 const port = process.env.PORT || 3000;
 const io = require('socket.io')(server);
@@ -43,4 +44,4 @@ server.listen(port, function() {
   console.log('Server listening at %d', port);
 });
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
