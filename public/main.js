@@ -43,9 +43,6 @@ function initChart() {
   });
 }
 initChart();
-setInterval(function() {
-  chart.removeData();
-}, 200);
 
 // Send message and emit 'message'
 function sendMessage() {
@@ -106,6 +103,7 @@ socket.on('phone', function(data) {
   
   // Update chart
   chart.addData([data.accelerometer.x, data.accelerometer.y, data.accelerometer.z], ++latestLabel);
+  chart.removeData();
 });
 
 // Tell clients when someone disconnects
