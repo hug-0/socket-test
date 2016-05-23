@@ -41,6 +41,20 @@ socket.on('message', function(msg) {
   $messages.append('<li>' + msg.message + '</li>');
 });
 
+// Phone data
+if (window.DeviceMotionEvent) {
+  window.addEventListener('devicemotion', function(data) {
+    var acceleration = data.acceleration;
+    socket.emit('phone', acceleration);
+  });
+}
+
+socket.on('phone', function(data) {
+  $('#x').text(data.x);
+  $('#y').text(data.y);
+  $('#z').text(data.z);
+});
+
 // Tell clients when someone disconnects
 socket.on('left', function(msg) {
   $messages.append('<li>' + msg.message + '</li>');

@@ -38,6 +38,16 @@ io.on('connection', function (socket) {
       message: "Someone left the chat."
     })
   });
+  
+  // Phone data
+  socket.on('phone', function(data) {
+    console.log('Phone connected.');
+    socket.broadcast.emit('phone', {
+      x: data.x,
+      y: data.y,
+      z: data.z
+    });
+  });
 });
 
 server.listen(port, function() {
