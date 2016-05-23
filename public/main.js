@@ -50,9 +50,9 @@ if (window.DeviceMotionEvent) {
 }
 
 socket.on('phone', function(data) {
-  $('#x').text(data.x);
-  $('#y').text(data.y);
-  $('#z').text(data.z);
+  $('#x').text('X: ' + Math.round(data.x, 2));
+  $('#y').text('Y: ' + Math.round(data.y, 2));
+  $('#z').text('Z: ' + Math.round(data.z, 2));
 });
 
 // Tell clients when someone disconnects
