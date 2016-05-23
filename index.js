@@ -42,9 +42,16 @@ io.on('connection', function (socket) {
   // Phone data
   socket.on('phone', function(data) {
     socket.broadcast.emit('phone', {
-      x: data.x,
-      y: data.y,
-      z: data.z
+      accelerometer: {
+        x: data.acceleration.x,
+        y: data.acceleration.y,
+        z: data.acceleration.z
+      },
+      gyro: {
+        alpha: data.gyro.alpha,
+        beta: data.gyro.beta,
+        gamma: data.gyro.gamma
+      }
     });
   });
 });
