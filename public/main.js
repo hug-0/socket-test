@@ -47,8 +47,8 @@ initChart();
 setInterval(function() {
   accData.forEach(function(row) {
     chart.addData(row, ++latestLabel);
-    chart.removeData();
   });
+  chart.removeData();
   accData = [];
 }, 100);
 
