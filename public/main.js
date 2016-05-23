@@ -16,24 +16,27 @@ function initChart() {
     labels: [1,2,3,4,5,6,7],
     datasets: [
       {
-        fillColor: "rgba(220,220,220,0.2)",
-        strokeColor: "rgba(220,220,220,1)",
-        pointColor: "rgba(220,220,220,1)",
+        backgroundColor: "rgba(220,220,220,0.2)",
+        borderColor: "rgba(220,220,220,1)",
+        pointBackgroundColor: "rgba(220,220,220,1)",
         pointStrokeColor: "#fff",
+        label: "X-acceleration",
         data: [1,1,1,1,1,1,1]
       },
       {
-        fillColor: "rgba(151,187,205,0.2)",
-        strokeColor: "rgba(151,187,205,1)",
-        pointColor: "rgba(151,187,205,1)",
+        backgroundColor: "rgba(151,187,205,0.2)",
+        borderColor: "rgba(151,187,205,1)",
+        pointBackgroundColor: "rgba(151,187,205,1)",
         pointStrokeColor: "#fff",
+        label: "Y-acceleration",
         data: [1,1,1,1,1,1,1]
       },
       {
-        fillColor: "rgba(100,187,125,0.2)",
-        strokeColor: "rgba(123,55,205,1)",
-        pointColor: "rgba(123,55,205,1)",
+        backgroundColor: "rgba(100,187,125,0.2)",
+        borderColor: "rgba(123,55,205,1)",
+        pointBackgroundColor: "rgba(123,55,205,1)",
         pointStrokeColor: "#fff",
+        label: "Z-acceleration",
         data: [1,1,1,1,1,1,1]
       }
     ]
