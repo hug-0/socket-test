@@ -50,7 +50,7 @@ setInterval(function() {
   });
   chart.removeData();
   accData = [];
-}, 100);
+}, 500);
 
 // Send message and emit 'message'
 function sendMessage() {
