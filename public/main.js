@@ -7,6 +7,41 @@ var $input = $('.input');
 var socket = io();
 var connected = false;
 
+// Bar Variables
+var ctx, startingData, chart, latestLabel;
+function initChart() {
+  ctx = document.getElementById("acc-chart").getContext("2d");
+  startingData = {
+    labels: [1,2,3,4,5,6,7],
+    datasets: [
+      {
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        data: [65, 59, 80, 81, 56, 55, 40]
+      },
+      {
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        data: [28, 48, 40, 19, 86, 27, 90]
+      },
+      {
+        fillColor: "rgba(100,187,125,0.2)",
+        strokeColor: "rgba(123,55,205,1)",
+        pointColor: "rgba(123,55,205,1)",
+        pointStrokeColor: "#fff",
+        data: [33, 22, 11, 19, 67, 36, 90]
+      }
+    ]
+  };
+  latestLabel = startingData.labels[6];
+  chart = new Chart(ctx).Line(startingData);
+}
+initChart();
+
 // Send message and emit 'message'
 function sendMessage() {
   var msg = $input.val();
@@ -55,13 +90,18 @@ if (window.DeviceMotionEvent) {
 }
 
 socket.on('phone', function(data) {
+  // Acc data
   $('#x').text('X: ' + Math.round(data.accelerometer.x * 100)/100);
   $('#y').text('Y: ' + Math.round(data.accelerometer.y * 100)/100);
   $('#z').text('Z: ' + Math.round(data.accelerometer.z * 100)/100);
-  
+  // Gyro data
   $('#a').text('Alpha: ' + Math.round(data.gyro.alpha * 100)/100);
   $('#b').text('Beta: ' + Math.round(data.gyro.beta * 100)/100);
   $('#g').text('Gamma: ' + Math.round(data.gyro.gamma * 100)/100);
+  
+  // Update chart
+  chart.addData([data.accelerometer.x, data.accelerometer.y, data.accelerometer.z], ++latestLabel);
+  chart.removeData();
 });
 
 // Tell clients when someone disconnects

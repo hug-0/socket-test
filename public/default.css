@@ -12,6 +12,12 @@ html, body {
 h1, h2 {
   text-align: center;
 }
+
+.chart {
+  width: 100%;
+  text-align: center;
+}
+
 .phone {
   text-align: center;
 }
