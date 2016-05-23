@@ -9,6 +9,7 @@ var connected = false;
 
 // Bar Variables
 var ctx, startingData, chart, latestLabel;
+var accData = [];
 function initChart() {
   ctx = document.getElementById("acc-chart").getContext("2d");
   startingData = {
@@ -43,6 +44,13 @@ function initChart() {
   });
 }
 initChart();
+setInterval(function() {
+  accData.forEach(function(row) {
+    chart.addData(row, ++latestLabel);
+    chart.removeData();
+  });
+  accData = [];
+}, 100);
 
 // Send message and emit 'message'
 function sendMessage() {
@@ -101,9 +109,8 @@ socket.on('phone', function(data) {
   $('#b').text('Beta: ' + Math.round(data.gyro.beta * 100)/100);
   $('#g').text('Gamma: ' + Math.round(data.gyro.gamma * 100)/100);
   
-  // Update chart
-  chart.addData([data.accelerometer.x, data.accelerometer.y, data.accelerometer.z], ++latestLabel);
-  chart.removeData();
+  // Add data to chart
+  accData.push([data.accelerometer.x, data.accelerometer.y, data.accelerometer.z]);
 });
 
 // Tell clients when someone disconnects
