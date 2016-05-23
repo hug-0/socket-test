@@ -19,7 +19,7 @@ h1, h2 {
   text-align: center;
 }
 
-#acc-chart {
+#acc-chart, #gyro-chart {
   margin: auto;
   display: block;
 }
