@@ -41,7 +41,6 @@ io.on('connection', function (socket) {
   
   // Phone data
   socket.on('phone', function(data) {
-    console.log('Phone connected.');
     socket.broadcast.emit('phone', {
       x: data.x,
       y: data.y,
