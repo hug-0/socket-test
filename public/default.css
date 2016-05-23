@@ -18,7 +18,8 @@ h1, h2 {
 
 .phone-data {
   margin: 0;
-  padding: 0;
+  padding: 10px 33%;
+  text-align: left;
 }
 
 hr {
