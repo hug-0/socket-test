@@ -19,21 +19,21 @@ function initChart() {
         strokeColor: "rgba(220,220,220,1)",
         pointColor: "rgba(220,220,220,1)",
         pointStrokeColor: "#fff",
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: [1,1,1,1,1,1,1]
       },
       {
         fillColor: "rgba(151,187,205,0.2)",
         strokeColor: "rgba(151,187,205,1)",
         pointColor: "rgba(151,187,205,1)",
         pointStrokeColor: "#fff",
-        data: [28, 48, 40, 19, 86, 27, 90]
+        data: [1,1,1,1,1,1,1]
       },
       {
         fillColor: "rgba(100,187,125,0.2)",
         strokeColor: "rgba(123,55,205,1)",
         pointColor: "rgba(123,55,205,1)",
         pointStrokeColor: "#fff",
-        data: [33, 22, 11, 19, 67, 36, 90]
+        data: [1,1,1,1,1,1,1]
       }
     ]
   };
@@ -103,7 +103,6 @@ socket.on('phone', function(data) {
   
   // Update chart
   chart.addData([data.accelerometer.x, data.accelerometer.y, data.accelerometer.z], ++latestLabel);
-  chart.removeData();
 });
 
 // Tell clients when someone disconnects
