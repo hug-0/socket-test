@@ -38,7 +38,9 @@ function initChart() {
     ]
   };
   latestLabel = startingData.labels[6];
-  chart = new Chart(ctx).Line(startingData);
+  chart = new Chart(ctx).Line(startingData, {
+    animationSteps: 15
+  });
 }
 initChart();
 
