@@ -44,13 +44,6 @@ function initChart() {
   });
 }
 initChart();
-setInterval(function() {
-  accData.forEach(function(row) {
-    chart.addData(row, ++latestLabel);
-  });
-  chart.removeData();
-  accData = [];
-}, 500);
 
 // Send message and emit 'message'
 function sendMessage() {
@@ -109,8 +102,14 @@ socket.on('phone', function(data) {
   $('#b').text('Beta: ' + Math.round(data.gyro.beta * 100)/100);
   $('#g').text('Gamma: ' + Math.round(data.gyro.gamma * 100)/100);
   
-  // Add data to chart
-  accData.push([data.accelerometer.x, data.accelerometer.y, data.accelerometer.z]);
+  // Remove old data and add new data
+  chart.data.datasets[0].data.shift();
+  chart.data.datasets[1].data.shift();
+  chart.data.datasets[2].data.shift();
+  chart.data.datasets[0].data.push(data.accelerometer.x);
+  chart.data.datasets[1].data.push(data.accelerometer.y);
+  chart.data.datasets[2].data.push(data.accelerometer.z);
+  chart.update();
 });
 
 // Tell clients when someone disconnects
