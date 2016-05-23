@@ -43,6 +43,9 @@ function initChart() {
   });
 }
 initChart();
+setInterval(function() {
+  chart.removeData();
+}, 200);
 
 // Send message and emit 'message'
 function sendMessage() {
