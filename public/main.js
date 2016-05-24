@@ -56,7 +56,6 @@ if (window.DeviceMotionEvent) {
       accelerometer: acceleration,
       gyro: gyro
     }
-    console.log(data);
     socket.emit('phone', d);
   });
 }
@@ -88,7 +87,7 @@ socket.on('phone', function(data) {
   gyroChart.data.datasets[2].data.push(data.gyro.gamma);
   gyroChart.update();
   
-  console.log("X: " + data.accelerometer.x);
+  console.log("X: " + data);
 });
 
 // Tell clients when someone disconnects
