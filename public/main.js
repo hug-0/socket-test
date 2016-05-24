@@ -62,6 +62,7 @@ if (window.DeviceMotionEvent) {
       gyro: gyro,
       interval: data.interval
     };
+    console.log(data);
     socket.emit('phone', d);
   }, false);
 }
