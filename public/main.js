@@ -35,12 +35,12 @@ socket.on('connection', function(data) {
     $messages.append('<li>' + message + '</li>');
   });
   socket.emit('joined');
-  console.log(window.DeviceMotionEvent);
 });
 
 // Tell clients when someone connects
 socket.on('joined', function(msg) {
   $messages.append('<li>' + msg.message + '</li>');
+  console.log(window.DeviceMotionEvent);
 })
 
 // Add message to chat
