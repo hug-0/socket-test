@@ -51,7 +51,8 @@ io.on('connection', function (socket) {
         alpha: data.gyro.alpha,
         beta: data.gyro.beta,
         gamma: data.gyro.gamma
-      }
+      },
+      interval: data.interval
     });
   });
 });
