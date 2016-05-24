@@ -60,7 +60,7 @@ if (window.DeviceMotionEvent) {
       gyro: gyro
     }
     socket.emit('phone', d);
-  });
+  }, false);
 }
 
 socket.on('phone', function(data) {
