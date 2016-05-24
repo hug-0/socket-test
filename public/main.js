@@ -40,8 +40,10 @@ socket.on('connection', function(data) {
 // Tell clients when someone connects
 socket.on('joined', function(msg) {
   $messages.append('<li>' + msg.message + '</li>');
-  console.log(window.DeviceMotionEvent);
-})
+  window.addEventListener("devicemotion", function(e) {
+    console.log(e);
+  });
+});
 
 // Add message to chat
 socket.on('message', function(msg) {
