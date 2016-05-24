@@ -35,6 +35,7 @@ socket.on('connection', function(data) {
     $messages.append('<li>' + message + '</li>');
   });
   socket.emit('joined');
+  console.log(window.DeviceMotionEvent);
 });
 
 // Tell clients when someone connects
@@ -57,7 +58,6 @@ if (window.DeviceMotionEvent) {
       gyro: gyro
     }
     socket.emit('phone', d);
-    console.log(d);
   });
 }
 
