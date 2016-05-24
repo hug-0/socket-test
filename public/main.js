@@ -62,7 +62,6 @@ if (window.DeviceMotionEvent) {
       gyro: gyro,
       interval: data.interval
     };
-    console.log(data);
     socket.emit('phone', d);
   }, false);
 }
@@ -93,8 +92,6 @@ socket.on('phone', function(data) {
   gyroChart.data.datasets[1].data.push(data.gyro.beta);
   gyroChart.data.datasets[2].data.push(data.gyro.gamma);
   gyroChart.update();
-  
-  console.log(data.interval);
 });
 
 // Tell clients when someone disconnects
