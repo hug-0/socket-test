@@ -56,6 +56,7 @@ if (window.DeviceMotionEvent) {
       accelerometer: acceleration,
       gyro: gyro
     }
+    console.log(data);
     socket.emit('phone', d);
   });
 }
