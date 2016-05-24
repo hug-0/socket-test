@@ -3,6 +3,8 @@ var $chat = $('.chat');
 var $messages = $('.messages');
 var $input = $('.input');
 
+// Random comment
+
 // SocketIO
 var socket = io();
 var connected = false;
