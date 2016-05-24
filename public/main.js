@@ -87,7 +87,7 @@ socket.on('phone', function(data) {
   gyroChart.data.datasets[2].data.push(data.gyro.gamma);
   gyroChart.update();
   
-  console.log("X: " + data);
+  console.log("X: " + data.gyro);
 });
 
 // Tell clients when someone disconnects
