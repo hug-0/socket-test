@@ -41,7 +41,7 @@ socket.on('connection', function(data) {
 socket.on('joined', function(msg) {
   $messages.append('<li>' + msg.message + '</li>');
   window.addEventListener("devicemotion", function(e) {
-    console.log(e);
+    console.log(e.acceleration.x);
   });
 });
 
