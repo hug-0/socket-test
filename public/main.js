@@ -58,8 +58,7 @@ if (window.DeviceMotionEvent) {
     var d = {
       accelerometer: acceleration,
       gyro: gyro
-    }
-    console.log(data.accelerationIncludingGravity.x);
+    };
     socket.emit('phone', d);
   }, false);
 }
