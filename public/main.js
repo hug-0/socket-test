@@ -201,8 +201,8 @@ function initGyroChart() {
         yAxes: [
           {
             ticks: {
-              min: -10,
-              max: 10
+              min: -1000,
+              max: 1000
             }
           }
         ]
