@@ -83,6 +83,8 @@ socket.on('phone', function(data) {
   accChart.data.datasets[0].data.push(data.accelerometer.x);
   accChart.data.datasets[1].data.push(data.accelerometer.y);
   accChart.data.datasets[2].data.push(data.accelerometer.z);
+  accChart.data.labels.push(++latestAccLabel);
+  accChart.data.labels.shift();
   accChart.update();
   
   gyroChart.data.datasets[0].data.shift();
@@ -91,6 +93,8 @@ socket.on('phone', function(data) {
   gyroChart.data.datasets[0].data.push(data.gyro.alpha);
   gyroChart.data.datasets[1].data.push(data.gyro.beta);
   gyroChart.data.datasets[2].data.push(data.gyro.gamma);
+  gyroChart.data.labels.push(++latestGyroLabel);
+  gyroChart.data.labels.shift();
   gyroChart.update();
 });
 
@@ -106,6 +110,7 @@ function initAccChart() {
     labels: [1,2,3,4,5,6,7],
     datasets: [
       {
+        fill: false,
         backgroundColor: "rgba(234,108,108,0.2)",
         borderColor: "rgba(234,108,108,1)",
         pointBackgroundColor: "rgba(234,108,108,1)",
@@ -114,6 +119,7 @@ function initAccChart() {
         data: [1,1,1,1,1,1,1]
       },
       {
+        fill: false,
         backgroundColor: "rgba(68,183,132,0.2)",
         borderColor: "rgba(68,183,132,1)",
         pointBackgroundColor: "rgba(68,183,132,1)",
@@ -122,6 +128,7 @@ function initAccChart() {
         data: [1,1,1,1,1,1,1]
       },
       {
+        fill: false,
         backgroundColor: "rgba(107,152,207,0.2)",
         borderColor: "rgba(107,152,207,1)",
         pointBackgroundColor: "rgba(107,152,207,1)",
@@ -136,7 +143,17 @@ function initAccChart() {
     type: 'line',
     data: startingAccData,
     options: {
-      animationSteps: 15
+      animationSteps: 15,
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              min: -20,
+              max: 20
+            }
+          }
+        ]
+      }
     }
   });
 }
@@ -146,6 +163,7 @@ function initGyroChart() {
     labels: [1,2,3,4,5,6,7],
     datasets: [
       {
+        fill: false,
         backgroundColor: "rgba(234,108,108,0.2)",
         borderColor: "rgba(234,108,108,1)",
         pointBackgroundColor: "rgba(234,108,108,1)",
@@ -154,6 +172,7 @@ function initGyroChart() {
         data: [1,1,1,1,1,1,1]
       },
       {
+        fill: false,
         backgroundColor: "rgba(68,183,132,0.2)",
         borderColor: "rgba(68,183,132,1)",
         pointBackgroundColor: "rgba(68,183,132,1)",
@@ -162,6 +181,7 @@ function initGyroChart() {
         data: [1,1,1,1,1,1,1]
       },
       {
+        fill: false,
         backgroundColor: "rgba(107,152,207,0.2)",
         borderColor: "rgba(107,152,207,1)",
         pointBackgroundColor: "rgba(107,152,207,1)",
@@ -176,7 +196,17 @@ function initGyroChart() {
     type: 'line',
     data: startingGyroData,
     options: {
-      animationSteps: 15
+      animationSteps: 15,
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              min: -10,
+              max: 10
+            }
+          }
+        ]
+      }
     }
   });
 }
