@@ -1,58 +1,31 @@
-// Variables
-var $chat = $('.chat');
-var $messages = $('.messages');
-var $input = $('.input');
-
-// Random comment
-
 // SocketIO
 var socket = io();
 var connected = false;
 
-// Bar Variables
+// Graph Variables
 var ctx1, startingAccData, accChart, latestAccLabel;
 var ctx2, startingGyroData, gyroChart, latestGyroLabel;
 initAccChart();
 initGyroChart();
 
-// Send message and emit 'message'
-function sendMessage() {
-  var msg = $input.val();
-  if (msg && connected) {
-    $input.val('');
-    $messages.append('<li>' + msg + '</li>');
-    socket.emit('message', msg);
-  }
+// Check viewport & basic device type to hide/show controller text
+if (/Mobi/i.test(navigator.userAgent) || /Tablet/i.test(navigator.userAgent)) {
+  $('.if-phone').css('display', 'block');
+  $('.if-phone').css('visibility', 'visible');
 }
-
-// Attach listener to Submit button
-$('.submitMessage').click(function() {
-  sendMessage();
-});
 
 // Render any messages from conversation stored on server upon connection
 socket.on('connection', function(data) {
   connected = true;
-  data.messages.forEach(function(message) {
-    $messages.append('<li>' + message + '</li>');
-  });
   socket.emit('joined');
 });
 
 // Tell clients when someone connects
-socket.on('joined', function(msg) {
-  $messages.append('<li>' + msg.message + '</li>');
-  window.addEventListener("devicemotion", function(e) {
-    console.log(e.acceleration.x);
-  });
+socket.on('joined', function(data) {
+  
 });
 
-// Add message to chat
-socket.on('message', function(msg) {
-  $messages.append('<li>' + msg.message + '</li>');
-});
-
-// Phone data
+// Phone data listener
 if (window.DeviceMotionEvent) {
   window.addEventListener('devicemotion', function(data) {
     var acceleration = data.accelerationIncludingGravity;
@@ -66,16 +39,7 @@ if (window.DeviceMotionEvent) {
   }, false);
 }
 
-socket.on('phone', function(data) {
-  // Acc data
-  $('#x').text('X: ' + Math.round(data.accelerometer.x * 100)/100);
-  $('#y').text('Y: ' + Math.round(data.accelerometer.y * 100)/100);
-  $('#z').text('Z: ' + Math.round(data.accelerometer.z * 100)/100);
-  // Gyro data
-  $('#a').text('Alpha: ' + Math.round(data.gyro.alpha * 100)/100);
-  $('#b').text('Beta: ' + Math.round(data.gyro.beta * 100)/100);
-  $('#g').text('Gamma: ' + Math.round(data.gyro.gamma * 100)/100);
-  
+socket.on('phone', function(data) {  
   // Remove old data and add new data
   accChart.data.datasets[0].data.shift();
   accChart.data.datasets[1].data.shift();
@@ -99,8 +63,8 @@ socket.on('phone', function(data) {
 });
 
 // Tell clients when someone disconnects
-socket.on('left', function(msg) {
-  $messages.append('<li>' + msg.message + '</li>');
+socket.on('left', function(data) {
+  
 });
 
 // Graph stuff
@@ -116,7 +80,7 @@ function initAccChart() {
         pointBackgroundColor: "rgba(234,108,108,1)",
         pointStrokeColor: "#fff",
         label: "X-acceleration",
-        data: [1,1,1,1,1,1,1]
+        data: [0,0,0,0,0,0,0]
       },
       {
         fill: false,
@@ -125,7 +89,7 @@ function initAccChart() {
         pointBackgroundColor: "rgba(68,183,132,1)",
         pointStrokeColor: "#fff",
         label: "Y-acceleration",
-        data: [1,1,1,1,1,1,1]
+        data: [0,0,0,0,0,0,0]
       },
       {
         fill: false,
@@ -134,7 +98,7 @@ function initAccChart() {
         pointBackgroundColor: "rgba(107,152,207,1)",
         pointStrokeColor: "#fff",
         label: "Z-acceleration",
-        data: [1,1,1,1,1,1,1]
+        data: [0,0,0,0,0,0,0]
       }
     ]
   };
@@ -169,7 +133,7 @@ function initGyroChart() {
         pointBackgroundColor: "rgba(234,108,108,1)",
         pointStrokeColor: "#fff",
         label: "Alpha",
-        data: [1,1,1,1,1,1,1]
+        data: [0,0,0,0,0,0,0]
       },
       {
         fill: false,
@@ -178,7 +142,7 @@ function initGyroChart() {
         pointBackgroundColor: "rgba(68,183,132,1)",
         pointStrokeColor: "#fff",
         label: "Beta",
-        data: [1,1,1,1,1,1,1]
+        data: [0,0,0,0,0,0,0]
       },
       {
         fill: false,
@@ -187,7 +151,7 @@ function initGyroChart() {
         pointBackgroundColor: "rgba(107,152,207,1)",
         pointStrokeColor: "#fff",
         label: "Gamma",
-        data: [1,1,1,1,1,1,1]
+        data: [0,0,0,0,0,0,0]
       }
     ]
   };
