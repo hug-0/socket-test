@@ -148,8 +148,8 @@ function initAccChart() {
         yAxes: [
           {
             ticks: {
-              min: -20,
-              max: 20
+              min: -15,
+              max: 15
             }
           }
         ]
@@ -201,8 +201,8 @@ function initGyroChart() {
         yAxes: [
           {
             ticks: {
-              min: -1000,
-              max: 1000
+              min: -600,
+              max: 600
             }
           }
         ]
