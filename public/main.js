@@ -28,14 +28,18 @@ socket.on('joined', function(data) {
 // Phone data listener
 if (window.DeviceMotionEvent) {
   window.addEventListener('devicemotion', function(data) {
-    var acceleration = data.accelerationIncludingGravity;
-    var gyro = data.rotationRate;
-    var d = {
-      accelerometer: acceleration,
-      gyro: gyro,
-      interval: data.interval
-    };
-    socket.emit('phone', d);
+    if (data.accelerationIncludingGravity.x !== null || data.accelerationIncludingGravity.x !== undefined) {
+      var acceleration = data.accelerationIncludingGravity;
+      var gyro = data.rotationRate;
+      var d = {
+        accelerometer: acceleration,
+        gyro: gyro,
+        interval: data.interval
+      };
+      socket.emit('phone', d);
+    } else {
+      $('#phone-text').text('Your phone does not seem to send any actual sensor data. If you have an Android that might be the issue. Please try again with an iPhone.');
+    }
   }, false);
 }
 

@@ -15,7 +15,7 @@ io.on('connection', function (socket) {
   socket.on('joined', function() {
     console.log('Someone connected.');
     socket.broadcast.emit('joined', {
-      data: 'Someone has joined the chat.'
+      data: 'Someone has accessed the site.'
     });
   });
   
