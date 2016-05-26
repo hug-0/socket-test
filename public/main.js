@@ -28,7 +28,7 @@ socket.on('joined', function(data) {
 // Phone data listener
 if (window.DeviceMotionEvent) {
   window.addEventListener('devicemotion', function(data) {
-    if (data.accelerationIncludingGravity.x !== null || data.accelerationIncludingGravity.x !== undefined) {
+    if (data.accelerationIncludingGravity.x !== null && data.accelerationIncludingGravity.x !== undefined) {
       var acceleration = data.accelerationIncludingGravity;
       var gyro = data.rotationRate;
       var d = {
