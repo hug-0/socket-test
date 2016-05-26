@@ -65,8 +65,6 @@ socket.on('phone', function(data) {
   gyroChart.data.labels.push(++latestGyroLabel);
   gyroChart.data.labels.shift();
   gyroChart.update();
-  
-  $('#phone-text').text(data.accelerometer);
 });
 
 // Tell clients when someone disconnects
