@@ -38,9 +38,8 @@ if (window.DeviceMotionEvent) {
       };
       socket.emit('phone', d);
     } else {
-      $('#phone-text').val('Your phone does not seem to send any actual sensor data. If you have an Android that might be the issue. Please try again with an iPhone.');
-      $('#phone-text-h2').val('Device not supported');
-      alert('Your device does not send sensor data. Please try with an iPhone or similar.');
+      $('#phone-text').text('Your phone does not seem to send any actual sensor data. If you have an Android that might be the issue. Please try again with an iPhone.');
+      $('#phone-text-h2').text('Device not supported');
     }
   }, false);
 }
