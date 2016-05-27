@@ -21,12 +21,10 @@ if ('geolocation' in navigator) {
     position = [ pos.coords.latitude, pos.coords.longitude ];
     
     // Update clients and server
-    socket.emit('location', {
-      position: position
-    });
+    socket.emit('location', position);
     
     // Init map
-    initMap(position);
+    if (!deviceMap) initMap(position);
   }, function(error) {
     if (error) $('#error').text('There seems to be an issue with loading the maps and identifying the location of the device. This is caused by the map provider and is unrelated to Clayster. Please check in again later or use a different browser.');
   }, { enableHighAccuracy: true });
