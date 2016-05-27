@@ -47,7 +47,7 @@ socket.on('connection', function(data) {
 
 // Tell clients when someone connects
 socket.on('joined', function(data) {
-  if (!devicePin) {
+  if (!devicePin || !deviceMap.hasLayer(devicePin)) {
     // Add devicePin to Map
     var icon = L.icon({
       iconUrl: './smartphone.png',
@@ -246,18 +246,6 @@ function initMap(position) {
       maxZoom: 20,
       accessToken: 'pk.eyJ1IjoiaHVnLTAiLCJhIjoiY2lvcHd0dzN3MDBjZnVwa3E0MGk1dnVwMiJ9.bsu99nJKHMSnK5j17qFASA'
   }).addTo(deviceMap);
-  
-  // // Add devicePin to Map
-  // var icon = L.icon({
-  //   iconUrl: './smartphone.png',
-  //   iconSize: [15.96, 30]
-  // });
-  // 
-  // devicePin = L.marker(position, {
-  //   icon: icon,
-  //   title: 'Connected Sensors',
-  //   riseOnHover: true
-  // });
   
   devicePin.bindPopup('<b>Smartphone Location</b><br>');
   
