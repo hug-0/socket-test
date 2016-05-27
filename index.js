@@ -53,7 +53,7 @@ io.on('connection', function (socket) {
   socket.on('location', function(position) {
     socket.broadcast.emit('location', {
       position: position,
-      test: ax
+      ax: ax
     });
   });
 });

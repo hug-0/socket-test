@@ -67,7 +67,7 @@ socket.on('joined', function(data) {
 socket.on('location', function(data) {
   // Update device pin on map
   if (position && devicePin) {
-    devicePin.bindPopup('<b>Smartphone Location</b><br>Lat : '+data.position[0].toFixed(2)+'<br>Lng: '+data.position[1].toFixed(2)+'<br>X-acc: '+data.test.toFixed(2));
+    devicePin.bindPopup('<b>Smartphone Location</b><br>Lat : '+data.position[0].toFixed(2)+'<br>Lng: '+data.position[1].toFixed(2)+'<br>X-acc: '+data.ax.toFixed(2));
     position = [data.position[0], data.position[1]];
     devicePin.setLatLng(position);
     devicePin.update();
