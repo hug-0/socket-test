@@ -246,8 +246,4 @@ function initMap(position) {
       maxZoom: 20,
       accessToken: 'pk.eyJ1IjoiaHVnLTAiLCJhIjoiY2lvcHd0dzN3MDBjZnVwa3E0MGk1dnVwMiJ9.bsu99nJKHMSnK5j17qFASA'
   }).addTo(deviceMap);
-  
-  devicePin.bindPopup('<b>Smartphone Location</b><br>');
-  
-  devicePin.addTo(deviceMap);
 }
