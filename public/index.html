@@ -5,6 +5,7 @@
     <title>Real-time Smartphone Sensor Capture</title>
     <!-- Map CSS  -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="https://use.fontawesome.com/166625b55c.js"></script>
     <!-- Custom css -->
     <link rel="stylesheet" href="./default.css" media="screen" title="no title" charset="utf-8">
   </head>
@@ -38,6 +39,10 @@
         <h2>Device Location</h2>
         <div id="map">
           <!-- Map goes here  -->
+          <div id="loading">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+          </div>
         </div>
         <p id="error">
           

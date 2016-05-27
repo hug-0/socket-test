@@ -25,8 +25,10 @@ if ('geolocation' in navigator) {
     
     // Init map
     if (!deviceMap) initMap(position);
+    $('#loading').css('display:none; visibility:hidden;');
   }, function(error) {
     if (error) $('#error').text('There seems to be an issue with loading the maps and identifying the location of the device. This is caused by the map provider and is unrelated to Clayster. Please check in again later or use a different browser.');
+    $('#loading').css('display:none; visibility:hidden;');
   }, { enableHighAccuracy: true });
 } else {
   // Geolocation unsupported
