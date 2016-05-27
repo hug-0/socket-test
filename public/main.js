@@ -47,7 +47,20 @@ socket.on('connection', function(data) {
 
 // Tell clients when someone connects
 socket.on('joined', function(data) {
-  
+  if (!devicePin) {
+    // Add devicePin to Map
+    var icon = L.icon({
+      iconUrl: './smartphone.png',
+      iconSize: [15.96, 30]
+    });
+    
+    devicePin = L.marker(position, {
+      icon: icon,
+      title: 'Connected Sensors',
+      riseOnHover: true
+    });
+    if (deviceMap) devicePin.addTo(deviceMap);
+  }
 });
 
 // On location update
@@ -107,7 +120,7 @@ socket.on('phone', function(data) {
 // Tell clients when someone disconnects
 socket.on('left', function(data) {
   // Remove pin from map
-  deviceMap.removeLayer(devicePin);
+  // if(deviceMap && devicePin) deviceMap.removeLayer(devicePin);
 });
 
 // Graph stuff
