@@ -67,7 +67,7 @@ socket.on('joined', function(data) {
 socket.on('location', function(data) {
   // Update device pin on map
   if (position && devicePin) {
-    devicePin.bindPopup('<b>Smartphone Location</b><br>Lat : '+data.position[0].toFixed(2)+'<br>Lng: '+data.position[1].toFixed(2)+'<br>X-acc: '+data.ax.toFixed(2));
+    devicePin.bindPopup('<b>Smartphone Location</b><br>Lat : '+data.position[0].toFixed(2)+'<br>Lng: '+data.position[1].toFixed(2));
     position = [data.position[0], data.position[1]];
     devicePin.setLatLng(position);
     devicePin.update();
@@ -120,7 +120,7 @@ socket.on('phone', function(data) {
 // Tell clients when someone disconnects
 socket.on('left', function(data) {
   // Remove pin from map
-  // if(deviceMap && devicePin) deviceMap.removeLayer(devicePin);
+  if(deviceMap && devicePin) deviceMap.removeLayer(devicePin);
 });
 
 // Graph stuff
@@ -247,19 +247,19 @@ function initMap(position) {
       accessToken: 'pk.eyJ1IjoiaHVnLTAiLCJhIjoiY2lvcHd0dzN3MDBjZnVwa3E0MGk1dnVwMiJ9.bsu99nJKHMSnK5j17qFASA'
   }).addTo(deviceMap);
   
-  // Add devicePin to Map
-  var icon = L.icon({
-    iconUrl: './smartphone.png',
-    iconSize: [15.96, 30]
-  });
+  // // Add devicePin to Map
+  // var icon = L.icon({
+  //   iconUrl: './smartphone.png',
+  //   iconSize: [15.96, 30]
+  // });
+  // 
+  // devicePin = L.marker(position, {
+  //   icon: icon,
+  //   title: 'Connected Sensors',
+  //   riseOnHover: true
+  // });
   
-  devicePin = L.marker(position, {
-    icon: icon,
-    title: 'Connected Sensors',
-    riseOnHover: true
-  });
-  
-  devicePin.bindPopup('<b>Smartphone Acceleration</b><br>');
+  devicePin.bindPopup('<b>Smartphone Location</b><br>');
   
   devicePin.addTo(deviceMap);
 }

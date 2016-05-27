@@ -5,8 +5,6 @@ const server = require('http').createServer(app);
 const port = process.env.PORT || 3000;
 const io = require('socket.io')(server);
 
-var aX = 0;
-
 io.on('connection', function (socket) {
   
   // On connection
@@ -31,9 +29,6 @@ io.on('connection', function (socket) {
   
   // Phone data
   socket.on('phone', function(data) {
-    // test
-    aX = data.accelerometer.x;
-    
     socket.broadcast.emit('phone', {
       accelerometer: {
         x: data.accelerometer.x,
@@ -52,8 +47,7 @@ io.on('connection', function (socket) {
   // Location
   socket.on('location', function(position) {
     socket.broadcast.emit('location', {
-      position: position,
-      ax: aX
+      position: position
     });
   });
 });
