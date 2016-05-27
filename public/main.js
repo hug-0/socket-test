@@ -73,6 +73,7 @@ socket.on('location', function(data) {
     position = [data.position[0], data.position[1]];
     devicePin.setLatLng(position);
     devicePin.update();
+    deviceMap.panTo(position, { animate: true });
   }
 });
 
