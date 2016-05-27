@@ -14,9 +14,6 @@ if ('geolocation' in navigator) {
   // Get first position
   navigator.geolocation.getCurrentPosition(function(pos) {
     position = [ pos.coords.latitude, pos.coords.longitude ];
-    
-    // Init map
-    initMap(position);
   });
   
   deviceWatcher = navigator.geolocation.watchPosition(function(pos) {
@@ -27,6 +24,9 @@ if ('geolocation' in navigator) {
     socket.emit('location', {
       position: position
     });
+    
+    // Init map
+    initMap(position);
   }, function(error) {
     if (error) $('#error').text('There seems to be an issue with loading the maps and identifying the location of the device. This is caused by the map provider and is unrelated to Clayster. Please check in again later or use a different browser.');
   }, { enableHighAccuracy: true });
