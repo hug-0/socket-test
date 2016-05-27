@@ -56,47 +56,7 @@ hr {
   width: 100%;
 }
 
-.chatInput {
-  text-align: center;
-}
-
-input[type=submit] {
+#map {
   width: 100%;
-  height: 40px;
-  margin: 10px 0;
-  padding: 5px 5px 5px 5px;
-  border: 1px solid #5DB78B;
-  background: #5DB78B;
-  color: white;
-  cursor: pointer;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  font-size: 20px;
-  font-weight: 300;
-}
-
-.input {
-  width: 100%;
-  height: 30px;
-  border: 1px solid #5DB78B;
-  border-radius: 4px;
-  text-indent: 5px;
-  font-size: 20px;
-  color: #535353;
-}
-
-.chat {
-  padding: 0px 0px 0px 0px;
-}
-
-.messages {
-  padding: 0;
-}
-
-li {
-  font-size: 20px;
-  font-family: 'Helvetica Neue', sans-serif;
-  list-style: none;
-  padding-bottom: 5px;
-  font-weight: 300;
+  height: 300px;
 }

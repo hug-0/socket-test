@@ -43,6 +43,13 @@ io.on('connection', function (socket) {
       interval: data.interval
     });
   });
+  
+  // Location
+  socket.on('location', function(position) {
+    socket.broadcast.emit('location', {
+      position: position
+    });
+  });
 });
 
 server.listen(port, function() {

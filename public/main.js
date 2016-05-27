@@ -8,6 +8,33 @@ var ctx2, startingGyroData, gyroChart, latestGyroLabel;
 initAccChart();
 initGyroChart();
 
+// Map Variables
+var deviceMap, position, deviceWatcher, devicePin;
+if ('geolocation' in navigator) {
+  // Get first position
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    position = [ pos.coords.latitude, pos.coords.longitude ];
+    
+    // Init map
+    initMap(position);
+  });
+  
+  deviceWatcher = navigator.geolocation.watchPosition(function(pos) {
+    // Update position
+    position = [ pos.coords.latitude, pos.coords.longitude ];
+    
+    // Update clients and server
+    socket.emit('location', {
+      position: position
+    });
+  }, function(error) {
+    if (error) $('#error').text('There seems to be an issue with loading the maps and identifying the location of the device. This is caused by the map provider and is unrelated to Clayster. Please check in again later or use a different browser.');
+  }, { enableHighAccuracy: true });
+} else {
+  // Geolocation unsupported
+  $('#map').innerHTML = "Geolocation not supported on connected phone (device).";
+}
+
 // Check viewport & basic device type to hide/show controller text
 if (/Mobi/i.test(navigator.userAgent) || /Tablet/i.test(navigator.userAgent)) {
   $('.if-phone').css('display', 'block');
@@ -23,6 +50,16 @@ socket.on('connection', function(data) {
 // Tell clients when someone connects
 socket.on('joined', function(data) {
   
+});
+
+// On location update
+socket.on('location', function(position) {
+  // Update device pin on map
+  if (position) {
+    devicePin.bindPopup('<b>Smartphone Location</b><br>Lat : '+position[0].toString().toFixed(2)+'<br>Lng: '+position[1].toString().toFixed(2));
+    devicePin.setLatLng(position);
+    devicePin.update();
+  }
 });
 
 // Phone data listener
@@ -45,7 +82,7 @@ if (window.DeviceMotionEvent) {
 }
 
 socket.on('phone', function(data) {  
-  // Remove old data and add new data
+  // Remove old data and add new data to accelerometer
   accChart.data.datasets[0].data.shift();
   accChart.data.datasets[1].data.shift();
   accChart.data.datasets[2].data.shift();
@@ -56,6 +93,7 @@ socket.on('phone', function(data) {
   accChart.data.labels.shift();
   accChart.update();
   
+  // Remove old data and add new data to gyro
   gyroChart.data.datasets[0].data.shift();
   gyroChart.data.datasets[1].data.shift();
   gyroChart.data.datasets[2].data.shift();
@@ -69,7 +107,8 @@ socket.on('phone', function(data) {
 
 // Tell clients when someone disconnects
 socket.on('left', function(data) {
-  
+  // Remove pin from map
+  deviceMap.removeLayer(devicePin);
 });
 
 // Graph stuff
@@ -126,6 +165,7 @@ function initAccChart() {
     }
   });
 }
+
 function initGyroChart() {
   ctx2 = document.getElementById("gyro-chart").getContext("2d");
   startingGyroData = {
@@ -178,4 +218,36 @@ function initGyroChart() {
       }
     }
   });
+}
+
+// Setup map
+function initMap(position) {
+  var initZoom = 13;
+    
+  // Init map
+  deviceMap = L.map('map').setView(position, initZoom);
+  
+  // Add tiles
+  // create the tile layer with correct attribution
+  L.tileLayer('https://api.mapbox.com/styles/v1/hug-0/ciopx04ul000yolkngrt99n9b/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 20,
+      accessToken: 'pk.eyJ1IjoiaHVnLTAiLCJhIjoiY2lvcHd0dzN3MDBjZnVwa3E0MGk1dnVwMiJ9.bsu99nJKHMSnK5j17qFASA'
+  }).addTo(deviceMap);
+  
+  // Add devicePin to Map
+  var icon = L.icon({
+    iconUrl: './smartphone.png',
+    iconSize: [15.96, 30]
+  });
+  
+  devicePin = L.marker(position, {
+    icon: icon,
+    title: 'Connected Sensors',
+    riseOnHover: true
+  });
+  
+  devicePin.bindPopup('<b>Smartphone Acceleration</b><br>');
+  
+  devicePin.addTo(deviceMap);
 }
